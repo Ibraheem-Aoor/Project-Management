@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -26,7 +26,7 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/', ['uses' => 'HomeController@landingPage'])->middleware(['XSS']);
+Route::redirect('/', 'login')->middleware(['XSS']);
 
 Route::get(
 
@@ -68,7 +68,7 @@ Route::prefix('client')->as('client.')->group(function() {
     Route::delete('/{slug}/projects/milestone/{id}',['as' => 'projects.milestone.destroy','uses' =>'ProjectController@milestoneDestroy'])->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/{id}/file/{fid}',['as' => 'projects.file.download','uses' =>'ProjectController@fileDownload'])->middleware(['auth:client','XSS']);
     Route::delete('/{slug}/projects/{id}/file/delete/{fid}',['as' => 'projects.file.delete','uses' =>'ProjectController@fileDelete'])->middleware(['auth:client','XSS']);
-    
+
     // Task Board
     Route::get('/{slug}/projects/{id}/task-board',['as' => 'projects.task.board','uses' =>'ProjectController@taskBoard'])->middleware(['auth:client','XSS']);
     Route::get('/{slug}/projects/{id}/task-board/create',['as' => 'tasks.create','uses' =>'ProjectController@taskCreate'])->middleware(['auth:client','XSS']);
@@ -173,7 +173,7 @@ Route::prefix('client')->as('client.')->group(function() {
     Route::get('/{slug}/invoice/coingate/{invoice}', ['as' => 'invoice.coingate','uses' => 'CoingatePaymentController@getInvoicePaymentStatus'])->middleware(['auth:client']);
 
     //================================= End Invoice Payment Gateways  ====================================//
-    
+
     Route::get('/{slug}/zoom-meeting',['as' => 'zoom-meeting.index','uses' =>'ZoomMeetingController@index'])->middleware(['auth:client']);
 
 });
