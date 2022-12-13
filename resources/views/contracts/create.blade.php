@@ -5,10 +5,10 @@
         <div class="col-md-6 form-group">
             {{ Form::label('client_id', __('Client Name'), ['class' => 'col-form-label']) }}
             {{ Form::select('client_id', $client, null, ['class' => 'form-control client_id','id' => 'client_id', 'data-toggle' => 'select', 'required' => 'required']) }}
-        </div>  
+        </div>
         <div class="col-md-6 form-group">
             {{ Form::label('project', __('Project'), ['class' => 'col-form-label']) }}
-            <div class="project-div"> 
+            <div class="project-div">
                 {{ Form::select('project_id', $projects, null, ['class' => 'form-control', 'id' => 'project','placeholder' => __('Select Projects'), 'name' => 'project','required' => 'required']) }}
             </div>
         </div>
@@ -20,7 +20,7 @@
             {{ Form::label('value', __('Value'),['class'=>'col-form-label']) }}
             {{ Form::number('value', '', array('class' => 'form-control','required'=>'required','min' => '1')) }}
         </div>
-        
+
         <div class="form-group col-md-6">
             {{ Form::label('start_date', __('Start Date'),['class'=>'col-form-label']) }}
             {{ Form::date('start_date', null, array('class' => 'form-control','required'=>'required')) }}
@@ -34,7 +34,7 @@
             {!! Form::select('type', $contractType, null,array('class' => 'form-select','required'=>'required')) !!}
             @if(count($contractType) <= 0)
                 <div class="text-muted text-xs">
-                    {{__('Please create new contract type')}} <a href="{{route('contract_type.index')}}">{{__('here')}}</a>.
+                    {{__('Please create new contract type')}} <a href="{{route('contract_type.index' , $currentWorkspace->name)}}">{{__('here')}}</a>.
                 </div>
             @endif
         </div>
@@ -73,4 +73,4 @@
 
 
 
-        
+
